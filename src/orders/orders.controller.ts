@@ -14,11 +14,11 @@ import {
 import { OrdersService } from './orders.service';
 import { Request, Response } from 'express';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { AuthGuard } from '../auth/auth.guard'; // tùy bạn đặt guard thế nào
+// import { AuthGuard } from '../auth/auth.guard'; // tùy bạn đặt guard thế nào
 import { UsersService } from '../users/users.service';
 import { CoursesService } from '../courses/courses.service';
 import { NotificationsService } from '../notifications/notifications.service';
-import { MailService } from '../mail/mail.service';
+import { MailerService } from 'src/common/services/mailer.service';
 
 @Controller('orders')
 export class OrdersController {
@@ -27,10 +27,10 @@ export class OrdersController {
     private readonly usersService: UsersService,
     private readonly coursesService: CoursesService,
     private readonly notificationsService: NotificationsService,
-    private readonly mailService: MailService,
+    private readonly mailerService: MailerService,
   ) {}
 
-  @UseGuards(AuthGuard)
+  // @UseGuards(AuthGuard)
   @Post()
   async createOrder(
     @Req() req: Request,
@@ -101,7 +101,7 @@ export class OrdersController {
     }
   }
 
-  @UseGuards(AuthGuard)
+  // @UseGuards(AuthGuard)
   @Get('admin')
   async getAdminOrders(@Res() res: Response) {
     try {
@@ -112,7 +112,7 @@ export class OrdersController {
     }
   }
 
-  @UseGuards(AuthGuard)
+  // @UseGuards(AuthGuard)
   @Get('me')
   async getUserOrders(@Req() req: Request, @Res() res: Response) {
     try {
